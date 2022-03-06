@@ -39,7 +39,7 @@ function getEveryMovie(m) {
   movieList.appendChild(moviePoster)
 
   img.addEventListener('click', () => {
-    
+
     // console.log('getEveryMovie:', m);
     console.log('getEveryMovie:', moviePoster)
     setMovieInfoToDom(m)
@@ -54,7 +54,7 @@ function deleteMovie(image, el) {
     const currentMovie = document.querySelector('h3.title').innerText
     // console.log('movie:', movie);
     // console.log('movieList:', movieList.children);
-    
+
     // let list = movieList.children
     let size = list.length
     // console.log('list size:', size);
@@ -63,29 +63,34 @@ function deleteMovie(image, el) {
 
     if (size === 0) {
       setMovieInfoToDom(defaultInfo)
-    }    
+    }
 
-    for(let i = 0; i < size; i++) {
+    for (let i = 0; i < size; i++) {
       if (list[i].name === currentMovie && size > 1) {
-        console.log('List[i+1]:', list[i+1]);
-        setMovieInfoToDom(list[i+1])
-        removeMovieFromDB(list[i])
-        if(arguments.length === 0) {
+        if(i === size-1) {
+          setMovieInfoToDom(defaultInfo)
+          removeMovieFromDB(list[i])
+        } else {
+          setMovieInfoToDom(list[i + 1])
+          removeMovieFromDB(list[i])
+        }      
+        
+        if (!image) {
           el.remove()
         } else {
           image.remove()
-        }        
-        return 
-      } else if(list[i].name === currentMovie && size === 1) {
+        }
+        return
+      } else if (list[i].name === currentMovie && size === 1) {
         setMovieInfoToDom(defaultInfo)
         removeMovieFromDB(list[i])
-        if(arguments.length === 0) {
+        if (!image) {
           el.remove()
         } else {
           image.remove()
-        }        
+        }
         return
-      }        
+      }
     }
   })
 }
@@ -133,7 +138,7 @@ function removeMovieFromDB(movie) {
       }
     })
     .then(res => res.json())
-    .then(movie => console.log(movie))
+    .then(movie => console.log('Removed movie from DB:', movie))
 }
 
 function searchMovies() {
@@ -146,7 +151,7 @@ function searchMovies() {
     fetch(`http://www.omdbapi.com/?t=${movieName}&apikey=19546fcd`)
       .then(res => res.json())
       .then(movie => {
-        console.log('AAAA:', movie);
+        // console.log('AAAA:', movie);
         movieDetail[0].src = movie.Poster
         movieDetail[1].innerText = movie.Title
         movieDetail[2].innerText = movie.Genre
@@ -163,6 +168,7 @@ function searchMovies() {
 }
 
 function setMovieInfoToDom(data) {
+  debugger
   movieDetail[0].src = data.img_link
   movieDetail[1].innerText = data.name
   movieDetail[2].innerText = data.genre
