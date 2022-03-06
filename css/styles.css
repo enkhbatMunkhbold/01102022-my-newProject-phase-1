@@ -1,0 +1,128 @@
+body {
+  background-color: #396EB0;
+  color: #fff;
+  font-family: "Montserrat";
+}
+
+h1 {
+  text-align: center;
+  font-family: 'Merriweather', sans-serif;
+  font-weight: bold;
+  font-size: 4rem;  
+}
+
+.colored-section {
+  background-color: #2E4C6D;
+}
+
+.navbar {
+  padding: auto;
+}
+
+.navbar-brand {
+  font-family: 'Ubuntu';
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.nav-item {
+  padding: 0 18px;
+}
+
+.nav-link {
+  font-size: 1.2rem;
+  font-family: "Montserrat-Light";
+}
+
+.container {
+  height: 1300px; 
+  display: flex;
+  justify-content: center;
+}
+
+#list {
+  text-align: center;
+  padding-top: 2rem;
+  height: 1100px;
+}
+
+ul {
+  list-style-type: none;
+}
+
+#movie-list {  
+  overflow-y: auto;  
+  margin: 2rem;
+  /* padding-left: 2rem; */
+  max-width: calc(100vw - 2rem);
+}
+
+#movie-list img {
+  flex: 1 0 auto;
+  height: 240px;
+  width: 12rem;
+  margin-top: 0.5rem;
+  cursor: pointer;
+}
+
+.marquee {
+  overflow: hidden;
+  position: relative;
+  height: 1100px;
+  animation: MarqueeDown linear 18s infinite;
+}
+@keyframes MarqueeDown
+{
+  0% { top: -100% }
+  100% { top: 100% }
+}
+
+#pop-movie {
+  padding-top: 2rem;
+}
+
+#movie-detail {
+  position: relative;
+  text-align: center;
+}
+
+.poster {
+  height:50rem;
+  margin-top: 40px;
+}
+
+.genre, .year, .title {
+  position: absolute;
+  left: 390px;
+  padding: 0.25rem 5rem 0.25rem 1rem;
+  background-color: bisque;
+  color: #000;
+}
+
+.title {
+  bottom: 110px;
+}
+
+.genre {
+  bottom: 60px;
+}
+
+.year {
+  bottom: 10px;
+}
+
+#search-form {
+  display: flex;
+  padding: 150px;
+  justify-content: flex-start;
+
+}
+
+.commentsAndRating, .buttons {
+  margin-top: 2rem;
+  padding-left: 25rem;
+}
+
+#deleteBtn, #saveBtn {
+  margin-left: 1.5rem;
+}

@@ -1,0 +1,67 @@
+{
+  "movies": [
+    {
+      "id": 1,
+      "name": "The Last of the Mohicans",
+      "img_link": "https://m.media-amazon.com/images/M/MV5BZDNiYmRkNDYtOWU1NC00NmMxLWFkNmUtMGI5NTJjOTJmYTM5XkEyXkFqcGdeQXVyNzQ1ODk3MTQ@._V1_FMjpg_UX1000_.jpg",
+      "genre": "Historical Fiction and Adventure",
+      "year": 1992,
+      "rating": 7.7,
+      "comment": "Exciting and magnificent movie with overwhelming scenes and impressive scenarios."      
+    },
+    {
+      "id": 2,
+      "name": "Back To the Future",
+      "img_link": "https://scontent-sjc3-1.xx.fbcdn.net/v/t1.18169-9/10675612_10152880279491079_2317051885475036911_n.jpg?_nc_cat=105&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=zg-Y_j8qo1oAX9tYDvD&_nc_oc=AQkQNbDezqgtesITqo4WqHuhvixURPDACtA2cA3DWb0Ez0NHf7buJv3ci5bnsl2daGdEpc2iZmpulyDy4zkC8Oly&_nc_ht=scontent-sjc3-1.xx&oh=00_AT-RcwweaSNDIZLktQJHtwwRGFlOOCPNMPgCYxoXNtGIXw&oe=624358BD",
+      "genre": "Adventure, Comedy, Sci-Fi",
+      "year": 1985,
+      "rating": 8.6,
+      "comment": "One of best scientific movies ever!"
+    },
+    {
+      "id": 3,
+      "name": "Gone with the Wind",
+      "img_link": "https://cdn.shopify.com/s/files/1/1057/4964/products/gone-with-the-wind-vintage-movie-poster-original-italian-2-foglio-39x55.jpg?v=1542949348", 
+      "genre": "Drama, History, Romance, War",
+      "year": 1939,     
+      "rating": 8.2,
+      "comment": "Epic civil war movie!"
+    },
+    {
+      "id": 4,
+      "name": "The Good, the Bad and the Ugly",
+      "img_link": "https://upload.wikimedia.org/wikipedia/en/thumb/4/45/Good_the_bad_and_the_ugly_poster.jpg/220px-Good_the_bad_and_the_ugly_poster.jpg",
+      "genre": "Adventure, Western",
+      "year": 1966,
+      "rating": 8.8,
+      "comment": "Epic spaghetti western with the best set-piece climax ever"
+    },
+    {
+      "id": 5,
+      "name": "The Mask",
+      "img_link": "https://upload.wikimedia.org/wikipedia/en/thumb/4/4b/The_Mask_%28film%29_poster.jpg/220px-The_Mask_%28film%29_poster.jpg",
+      "genre": "Action, Comedy, Crime, Fantasy",
+      "year": 1994,
+      "rating": 6.9,
+      "comment": "Better personality with the mask Jim carrey"
+    },
+    {
+      "id": 6,
+      "name": "Rocky",
+      "img_link": "https://static.wikia.nocookie.net/moviedatabase/images/0/0c/Rocky_%281976%29.jpg/revision/latest?cb=20141013161029",
+      "genre": "Drama, Sport",
+      "year": 1976,
+      "rating": 8.1,
+      "comment": "Rocky is regarded as the ultimate rags to riches story. It mirrors Sylvester Stallone's real life story."
+    },
+    {
+      "id": 7,
+      "name": "Terminator",
+      "img_link": "https://upload.wikimedia.org/wikipedia/en/thumb/7/70/Terminator1984movieposter.jpg/220px-Terminator1984movieposter.jpg",
+      "genre": "Action, Adventure, Sci-Fi",
+      "year": 1984,
+      "rating": 8.1,
+      "comment": "Best sci-fi movie ever ❤️"      
+    }    
+  ]
+}

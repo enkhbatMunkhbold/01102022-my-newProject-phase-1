@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/styles.css">
+  <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+  <script defer type="text/javascript" src="./src/index.js"></script>
+  <title>Favorite Movies Search</title>
+</head>
+
+<body>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+  </script>
+
+  <main>
+    <section class="colored-section" id="title">
+      <div class="container-fluid">
+
+        <nav class="navbar navbar-expand-md navbar-dark">
+          <a class="navbar-brand">Hollywood Movies</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerMenu">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarTogglerMenu">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="#">Contact</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Pricing</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Download</a>
+              </li>
+            </ul>
+          </div>
+
+        </nav>
+      </div>
+    </section>
+    
+    <section>
+      <div class="container">
+
+        <div class="col-3" id="list">          
+          <h3 id="list-title">My Favorites</h3>
+          <marquee direction="down">
+            <ul id="movie-list">
+              <!-- inserting movies here -->
+            </ul>            
+          </marquee>          
+        </div>
+
+        <div class="col-12" id="pop-movie">
+          <h1>POPULAR MOVIES</h1>
+          <div id="movie-detail">
+            <img class="poster" src="./src/image-placeholder.jpg" alt="Movie poster appear soon...">
+            <h3 class="title">Movie title goes here...</h3>
+            <h4 class="genre">Movie genre goes here...</h4>
+            <h4 class="year">Year: ...</h4> 
+          </div>
+          <div class="commentsAndRating"> 
+            <h3>Rating: </h3>
+            <p>
+              <span id="movie-rating">0.0 </span> / 10
+            </p>
+            <h3>Comment: </h3>
+            <p class="movie-comment">
+              Comments about the movie...
+            </p>
+          </div>
+          <div class="buttons">
+            <button type="submit" class="btn btn-outline-light col-3 btn-lg" id="deleteBtn">Delete</button>
+            <button type="submit" class="btn btn-outline-light col-3 btn-lg" id="saveBtn">Save to Favorites</button>
+          </div>
+        </div>
+
+        <div class="col-6">
+          <form class="row g-3" id="search-form" autocomplete="off">
+            <div class="col-auto">
+              <label for="movieSearch" class="visually-hidden"></label>
+              <h2 style="color: #fff;">Search for Movies</h2>
+            </div>
+            <div class="col-auto">
+              <label for="movie title" class="visually-hidden">Movie Title</label>
+              <input type="text" class="form-control" id="movie_title" placeholder="Movie title...">
+            </div>
+            <div class="col-auto">
+              <button type="submit" class="btn btn-outline-light mb-3">Search</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+  <footer>
+
+  </footer>
+</body>
+
+</html>
