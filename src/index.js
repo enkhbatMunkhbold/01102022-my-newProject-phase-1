@@ -23,7 +23,7 @@ const defaultInfo = {
   "name": "Movie title goes here...",
   "img_link": "./src/image-placeholder.jpg",
   "genre": "Movie genre goes here...",
-  "year": "Year: ...",
+  "year": "...",
   "rating": 0.0,
   "comment": "Comments about the movie..."
 }
@@ -34,33 +34,29 @@ function getEveryMovie(m) {
   const img = makeEl('img')
   img.src = m.img_link
   img.className = 'poster'
+  img.id = m.name
 
   moviePoster.appendChild(img)
   movieList.appendChild(moviePoster)
 
   img.addEventListener('click', () => {
 
-    // console.log('getEveryMovie:', m);
     console.log('getEveryMovie:', moviePoster)
     setMovieInfoToDom(m)
-    deleteMovie(img, moviePoster)
+    deleteMovie(img)
   })
 }
 
-function deleteMovie(image, el) {
+function deleteMovie(image) {
   const deleteBtn = document.querySelector('button#deleteBtn')
   deleteBtn.addEventListener('click', () => {
 
     const currentMovie = document.querySelector('h3.title').innerText
-    // console.log('movie:', movie);
-    // console.log('movieList:', movieList.children);
+    // debugger
+    console.log('movieList:', movieList.children);
+    const imageList = movieList.children
 
-    // let list = movieList.children
     let size = list.length
-    // console.log('list size:', size);
-    // console.log('currentMovie:', currentMovie);
-    debugger
-
     if (size === 0) {
       setMovieInfoToDom(defaultInfo)
     }
@@ -68,27 +64,18 @@ function deleteMovie(image, el) {
     for (let i = 0; i < size; i++) {
       if (list[i].name === currentMovie && size > 1) {
         if(i === size-1) {
-          setMovieInfoToDom(defaultInfo)
+          setMovieInfoToDom(list[0])
           removeMovieFromDB(list[i])
         } else {
           setMovieInfoToDom(list[i + 1])
           removeMovieFromDB(list[i])
-        }      
-        
-        if (!image) {
-          el.remove()
-        } else {
-          image.remove()
-        }
+        } 
+        imageList[i].remove()
         return
       } else if (list[i].name === currentMovie && size === 1) {
         setMovieInfoToDom(defaultInfo)
         removeMovieFromDB(list[i])
-        if (!image) {
-          el.remove()
-        } else {
-          image.remove()
-        }
+        imageList[i].remove()
         return
       }
     }
@@ -168,7 +155,7 @@ function searchMovies() {
 }
 
 function setMovieInfoToDom(data) {
-  debugger
+  // debugger
   movieDetail[0].src = data.img_link
   movieDetail[1].innerText = data.name
   movieDetail[2].innerText = data.genre
