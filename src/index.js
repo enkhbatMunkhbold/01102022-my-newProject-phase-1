@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
   renderFavoriteMovieList()
-  saveMovie
-  searchMovies
-  deleteMovie
+  saveMovie()
+  searchMovies()
+  deleteMovie()
 })
 
 let renderFavoriteMovieList = () => {
@@ -43,57 +43,66 @@ function getEveryMovie(m) {
 
     console.log('getEveryMovie:', moviePoster)
     setMovieInfoToDom(m)
-    deleteMovie(img)
+    deleteMovie()
   })
 }
 
-function deleteMovie(image) {
+function deleteMovie() {
   const deleteBtn = document.querySelector('button#deleteBtn')
   deleteBtn.addEventListener('click', () => {
 
     const currentMovie = document.querySelector('h3.title').innerText
-    // debugger
-    console.log('movieList:', movieList.children);
+    debugger
+    console.log('movieList before:', movieList.children);
     const imageList = movieList.children
 
-    let size = list.length
+    let size = imageList.length
     if (size === 0) {
       setMovieInfoToDom(defaultInfo)
     }
 
     for (let i = 0; i < size; i++) {
-      if (list[i].name === currentMovie && size > 1) {
+      if (imageList[i].id === currentMovie && size > 1) {
         if(i === size-1) {
           setMovieInfoToDom(list[0])
           removeMovieFromDB(list[i])
+          list.splice(i, 1)
+          imageList[i].remove()
+          return
         } else {
           setMovieInfoToDom(list[i + 1])
           removeMovieFromDB(list[i])
+          list.splice(i, 1)
+          imageList[i].remove()
+          return
         } 
-        imageList[i].remove()
-        return
-      } else if (list[i].name === currentMovie && size === 1) {
+        
+      } else if (imageList[i].id === currentMovie && size === 1) {
         setMovieInfoToDom(defaultInfo)
         removeMovieFromDB(list[i])
+        list.splice(i, 1)
         imageList[i].remove()
         return
       }
     }
-  })
+    return    
+  })  
 }
 
 function saveMovie() {
   const saveBtn = document.querySelector('button#saveBtn')
   saveBtn.addEventListener('click', () => {
-    const currentMovie = movieDetail[1].innerText
+    debugger
+    const currentMovie = movieDetail[1].innerText    
+    console.log('movie list:', list);
     let found = list.find(obj => obj.name === currentMovie ? true : false)
     if (!found) {
 
-      const img = makeEl('img')
-      img.src = movieDetail[0].src
-      img.className = 'poster'
-      document.querySelector('#movie-list').appendChild(img)
-
+      // const img = makeEl('img')
+      // img.src = movieDetail[0].src
+      // img.className = 'poster'
+      // document.querySelector('#movie-list').appendChild(img)
+      
       const obj = {
         "name": currentMovie,
         "img_link": movieDetail[0].src,
@@ -102,6 +111,8 @@ function saveMovie() {
         "rating": Number(rating.textContent),
         "comment": comment.innerText
       }
+      list.push(obj)
+      getEveryMovie(obj)
 
       fetch('http://localhost:3000/movies', {
           method: 'POST',
@@ -113,7 +124,6 @@ function saveMovie() {
         .then(res => res.json())
         .then(data => console.log(data))
     }
-    renderFavoriteMovieList()
   })
 }
 
@@ -134,6 +144,8 @@ function searchMovies() {
   search.addEventListener('submit', (e) => {
     e.preventDefault()
     const movieName = e.target[0].value
+    const searchMovieTitle = document.querySelector('input#movie_title')
+    searchMovieTitle.value = ''
 
     fetch(`http://www.omdbapi.com/?t=${movieName}&apikey=19546fcd`)
       .then(res => res.json())
