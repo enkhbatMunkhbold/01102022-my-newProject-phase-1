@@ -1,31 +1,13 @@
 {
   "movies": [
     {
-      "name": "Top Gun",
-      "img_link": "https://m.media-amazon.com/images/M/MV5BYTgzYTg5NTMtMjFmMy00MWIxLWEwYTQtN2UyMzY3NDIzOTRjL2ltYWdlXkEyXkFqcGdeQXVyNjQzNDI3NzY@._V1_SX300.jpg",
-      "genre": "Action, Drama",
-      "year": "Year: 1986",
-      "rating": 6.9,
-      "comment": "As students at the United States Navy's elite fighter weapons school compete to be best in the class, one daring young pilot learns a few things from a civilian instructor that are not taught in the classroom.",
+      "Title": "Mars",
+      "Poster": "https://m.media-amazon.com/images/M/MV5BMjQ1OTM2Mzk3Nl5BMl5BanBnXkFtZTgwMzY1NTM0MDI@._V1_SX300.jpg",
+      "Genre": "Adventure, Drama, Sci-Fi",
+      "Year": "2016–2018",
+      "Rating": "7.5/10",
+      "Plot": "The first manned mission from Earth to Mars in 2033 attempts to colonize the red planet.",
       "id": 1
-    },
-    {
-      "name": "Batman",
-      "img_link": "https://m.media-amazon.com/images/M/MV5BMTYwNjAyODIyMF5BMl5BanBnXkFtZTYwNDMwMDk2._V1_SX300.jpg",
-      "genre": "Action, Adventure",
-      "year": "Year: 1989",
-      "rating": 7.5,
-      "comment": "The Dark Knight of Gotham City begins his war on crime with his first major enemy being Jack Napier, a criminal who becomes the clownishly homicidal Joker.",
-      "id": 2
-    },
-    {
-      "name": "Friends",
-      "img_link": "https://m.media-amazon.com/images/M/MV5BNDVkYjU0MzctMWRmZi00NTkxLTgwZWEtOWVhYjZlYjllYmU4XkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_SX300.jpg",
-      "genre": "Comedy, Romance",
-      "year": "Year: 1994–2004",
-      "rating": 8.8,
-      "comment": "Follows the personal and professional lives of six twenty to thirty-something-year-old friends living in Manhattan.",
-      "id": 3
     }
   ]
 }

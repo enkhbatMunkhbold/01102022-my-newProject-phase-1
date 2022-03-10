@@ -35,14 +35,18 @@ h1 {
 }
 
 .container {
+  margin-top: 3rem;
   height: 1300px; 
   display: flex;
   justify-content: center;
 }
 
+#list-title {
+  left: 5rem;
+}
+
 #list {
   text-align: center;
-  padding-top: 2rem;
   height: 1100px;
 }
 
@@ -76,18 +80,14 @@ ul {
   100% { top: 100% }
 } */
 
-#pop-movie {
-  padding-top: 2rem;
-}
-
 #movie-detail {
+  padding-top: 2rem;
   position: relative;
   text-align: center;
 }
 
 .poster {
   height:50rem;
-  margin-top: 40px;
 }
 
 .genre, .year, .title {
@@ -122,6 +122,10 @@ ul {
   padding-left: 25rem;
 }
 
-#deleteBtn, #saveBtn {
+.deleteBtn, .saveBtn {
   margin-left: 1.5rem;
+}
+
+p.movie-comment {
+  font-size: 1.3rem;
 }
