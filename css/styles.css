@@ -14,6 +14,9 @@ h1 {
 .colored-section {
   background-color: #2E4C6D;
 }
+i {
+  color: #fff;
+}
 
 .navbar {
   padding: auto;
