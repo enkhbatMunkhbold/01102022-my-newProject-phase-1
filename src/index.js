@@ -6,9 +6,9 @@ const defaultInfo = {
   "Title": "Movie title goes here...",
   "Poster": "./src/image-placeholder.jpg",
   "Genre": "Movie genre goes here...",
-  "Year": "...",
+  "Year": " ...",
   "Ratings": "0.0/10",
-  "Plot": "Comments about a movie..."
+  "Plot": "Short description about a movie..."
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -33,7 +33,6 @@ const commentsAndRating = document.querySelector('div.commentsAndRating')
 const buttons = document.querySelector('div.buttons')
 
 function renderMovie(m) {
-  console.log('m:', m);  
   const moviePoster = makeEl('li')
   moviePoster.id = m.Title
   const img = makeEl('img')
