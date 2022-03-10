@@ -1,13 +1,22 @@
 {
   "movies": [
     {
-      "Title": "Mars",
-      "Poster": "https://m.media-amazon.com/images/M/MV5BMjQ1OTM2Mzk3Nl5BMl5BanBnXkFtZTgwMzY1NTM0MDI@._V1_SX300.jpg",
-      "Genre": "Adventure, Drama, Sci-Fi",
-      "Year": "2016–2018",
-      "Rating": "7.5/10",
-      "Plot": "The first manned mission from Earth to Mars in 2033 attempts to colonize the red planet.",
+      "Title": "Oscar",
+      "Poster": "https://m.media-amazon.com/images/M/MV5BMjRhYjg3YWEtOTYzZS00ZWY5LWJkNmEtYWE0YmQ3NDY2OWZlXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg",
+      "Genre": "Comedy, Crime",
+      "Year": "1991",
+      "Rating": "6.5/10",
+      "Plot": "A gangster attempts to keep the promise he made to his dying father: that he would give up his life of crime and \"go straight\".",
       "id": 1
+    },
+    {
+      "Title": "Titanic",
+      "Poster": "https://m.media-amazon.com/images/M/MV5BMDdmZGU3NDQtY2E5My00ZTliLWIzOTUtMTY4ZGI1YjdiNjk3XkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_SX300.jpg",
+      "Genre": "Drama, Romance",
+      "Year": "1997",
+      "Rating": "7.8/10",
+      "Plot": "A seventeen-year-old aristocrat falls in love with a kind but poor artist aboard the luxurious, ill-fated R.M.S. Titanic.",
+      "id": 2
     }
   ]
 }

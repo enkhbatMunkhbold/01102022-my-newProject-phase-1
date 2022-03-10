@@ -118,8 +118,8 @@ function saveMovie(button, obj) {
 
 function removeMovieFromDB(movie) {
   debugger
-  console.log('movie to remove from DB:', movie);
-  fetch(`http://localhost:3000/movies/${movie.Title}`, {
+  // console.log('movie to remove from DB:', movie);
+  fetch(`http://localhost:3000/movies/${movie.id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json'

@@ -42,19 +42,22 @@ h1 {
 }
 
 #list-title {
-  left: 5rem;
+  padding: 2rem 0;
+  /* background-color: #2E4C6D; */
 }
 
 #list {
   text-align: center;
   height: 1100px;
+  border: #2FA4FF;
+  border-style: groove;
 }
 
 ul {
   list-style-type: none;
 }
 
-#movie-list {  
+#movie-list {    
   overflow-y: auto;  
   margin: 2rem;
   max-width: calc(100vw - 2rem);
@@ -94,7 +97,7 @@ ul {
   position: absolute;
   left: 390px;
   padding: 0.25rem 5rem 0.25rem 1rem;
-  background-color: bisque;
+  background-color: #9AD0EC;
   color: #000;
 }
 
@@ -110,11 +113,19 @@ ul {
   bottom: 10px;
 }
 
+form {
+  border: #2FA4FF;
+  border-style: groove;
+}
+
+#search-movies {
+  padding-top: 8rem;
+}
+
 #search-form {
   display: flex;
   padding: 150px;
   justify-content: flex-start;
-
 }
 
 .commentsAndRating, .buttons {
