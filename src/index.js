@@ -1,4 +1,7 @@
 let list = []
+let savedMovie = false
+let movie_id = 0
+
 const defaultInfo = {
   "Title": "Movie title goes here...",
   "Poster": "./src/image-placeholder.jpg",
@@ -19,7 +22,7 @@ let renderFavoriteMovieList = () => {
     .then(data => list = data)
     .then(data => {
       data.forEach(renderMovie)
-      setMovieDetailsToDom(defaultInfo, defaultInfo.Ratings)     
+      setMovieDetailsToDom(defaultInfo, defaultInfo.Ratings, savedMovie = false)
     })
 }
 
@@ -30,7 +33,7 @@ const commentsAndRating = document.querySelector('div.commentsAndRating')
 const buttons = document.querySelector('div.buttons')
 
 function renderMovie(m) {
-  console.log('m:', m);
+  console.log('m:', m);  
   const moviePoster = makeEl('li')
   moviePoster.id = m.Title
   const img = makeEl('img')
@@ -42,62 +45,65 @@ function renderMovie(m) {
   movieList.appendChild(moviePoster)
 
   img.addEventListener('click', () => {
-    setMovieDetailsToDom(m, m.Rating)
+    setMovieDetailsToDom(m, m.Rating, savedMovie = true)
     deleteMovie(m)
   })
 }
 
-function deleteMovie(obj) {
-  const deleteBtn = document.querySelector(`button#deleteBtn${obj.id}`)
-  deleteBtn.addEventListener('click', () => {
+function deleteMovie(obj, btn) {
+  btn.addEventListener('click', () => {
     debugger
     console.log('movieList before:', movieList.children);
     console.log('List:', list);
     const imageList = movieList.children
     let imageSize = imageList.length
-    
+
     if (imageSize === 0) {
-      setMovieDetailsToDom(defaultInfo, defaultInfo.Ratings)
+      setMovieDetailsToDom(defaultInfo, defaultInfo.Ratings, savedMovie = false)
     } else if (imageSize === 1) {
-      setMovieDetailsToDom(defaultInfo, defaultInfo.Ratings)
+      setMovieDetailsToDom(defaultInfo, defaultInfo.Ratings, savedMovie = false)
       removeMovieFromDB(obj)
+      movie_id = 0
       list.pop(obj)
       imageList[0].remove()
     } else {
+      savedMovie = true
       for (let i = 0; i < imageSize; i++) {
         if (list[i].Title === obj.Title) {
           if (i === imageSize - 1) {
-            setMovieDetailsToDom(list[0], list[0].Ratings)
+            setMovieDetailsToDom(list[0], list[0].Ratings, savedMovie)
             removeMovieFromDB(list[i])
             list.splice(i, 1)
             imageList[i].remove()
             return
           } else {
-            setMovieDetailsToDom(list[i + 1], list[i + 1].Rating)
+            setMovieDetailsToDom(list[i + 1], list[i + 1].Rating, savedMovie)
             removeMovieFromDB(list[i])
             list.splice(i, 1)
             imageList[i].remove()
             return
-          }  
-        } 
+          }
+        }
       }
-    }    
+    }
   })
 }
 
 function saveMovie(button, obj) {
 
-  button.addEventListener('click', () => {    
+  button.addEventListener('click', () => {
     let found = list.find(movie => movie.Title === obj.Title ? true : false)
-    if (!found) {      
+    if (!found) {
+      movie_id += 1
       const element = {
+        "Movie_id": movie_id,
         "Title": obj.Title,
         "Poster": obj.Poster,
         "Genre": obj.Genre,
         "Year": obj.Year,
         "Rating": obj.Ratings[0].Value,
         "Plot": obj.Plot
-      }           
+      }
 
       fetch('http://localhost:3000/movies', {
           method: 'POST',
@@ -108,18 +114,15 @@ function saveMovie(button, obj) {
         })
         .then(res => res.json())
         .then(data => console.log(data))
-        // renderFavoriteMovieList()
-        list.push(element)
-        renderMovie(element)
-        
+      list.push(element)
+      renderMovie(element)
+
     }
   })
 }
 
 function removeMovieFromDB(movie) {
-  debugger
-  // console.log('movie to remove from DB:', movie);
-  fetch(`http://localhost:3000/movies/${movie.id}`, {
+  fetch(`http://localhost:3000/movies/${movie.Movie_id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json'
@@ -135,35 +138,35 @@ function searchMovies() {
   search.addEventListener('submit', (e) => {
     e.preventDefault()
     const movieName = e.target[0].value
-    console.log("movie name:", movieName);
     const searchMovieTitle = document.querySelector('input#movie_title')
     searchMovieTitle.value = ''
 
     fetch(`http://www.omdbapi.com/?t=${movieName}&apikey=19546fcd`)
       .then(res => res.json())
       .then(movie => {
-        // console.log('AAAA:', movie);        
-        if(movie.Response === 'False') {
+        savedMovie = false      
+        if (movie.Response === 'False') {
           const rate = '0.0/10'
-          setMovieDetailsToDom(defaultInfo, rate)
-        } else { 
-          const rating = movie.Ratings[0].Value         
-          setMovieDetailsToDom(movie, rating)
+          setMovieDetailsToDom(defaultInfo, rate, savedMovie)
+        } else {
+          const rating = movie.Ratings[0].Value
+          setMovieDetailsToDom(movie, rating, savedMovie)
         }
-        
+
       })
       .catch(err => {
         console.log('err:', err)
-        setMovieDetailsToDom(defaultInfo)
+        foundMovie = false
+        setMovieDetailsToDom(defaultInfo, '0.0/10', foundMovie)
       })
   })
 }
 
-function setMovieDetailsToDom(obj, rate) {
+function setMovieDetailsToDom(obj, rate, movieStatus) {
   const popMovies = document.querySelector('div#pop-movie')
   popMovies.innerHTML = ''
   const img = makeEl('img')
-  if(obj.Poster === 'N/A') {
+  if (obj.Poster === 'N/A') {
     obj.Poster = "./src/image-placeholder.jpg"
   }
   img.src = obj.Poster
@@ -185,25 +188,26 @@ function setMovieDetailsToDom(obj, rate) {
     <h3>Plot: </h3>
     <p class='movie-comment'>${obj.Plot}</p>`
 
+  popMovies.append(movieDetail, commentsAndRating)
   const buttons = makeEl('div')
   buttons.className = 'buttons'
 
-  const deleteBtn = makeEl('button')
-  deleteBtn.type = 'submit'
-  deleteBtn.className = 'btn btn-outline-light col-3 btn-lg deleteBtn'
-  deleteBtn.id = "deleteBtn" + obj.id
-  deleteBtn.textContent = 'Delete'
-
-  const saveBtn = makeEl('button')
-  saveBtn.type = 'submit'
-  saveBtn.className = 'btn btn-outline-light col-3 btn-lg saveBtn'
-  saveBtn.id = "saveBtn" + obj.id
-  saveBtn.textContent = 'Save to Favorite'
-
-  buttons.append(deleteBtn, saveBtn)
-  popMovies.append(movieDetail, commentsAndRating, buttons)
-
-  // debugger
-  saveMovie(saveBtn, obj)
-  deleteMovie(obj)
+  if (!movieStatus) {
+    const saveBtn = makeEl('button')
+    saveBtn.type = 'submit'
+    saveBtn.className = 'btn btn-outline-light col-5 btn-lg saveBtn'
+    saveBtn.id = "saveBtn" + obj.id
+    saveBtn.textContent = 'Save to Favorite'
+    buttons.appendChild(saveBtn)    
+    saveMovie(saveBtn, obj)
+  } else {
+    const deleteBtn = makeEl('button')
+    deleteBtn.type = 'submit'
+    deleteBtn.className = 'btn btn-outline-light col-5 btn-lg deleteBtn'
+    deleteBtn.id = "deleteBtn" + obj.id
+    deleteBtn.textContent = 'Delete'
+    buttons.appendChild(deleteBtn)
+    deleteMovie(obj, deleteBtn)
+  }
+  popMovies.appendChild(buttons)
 }
