@@ -26,3 +26,7 @@ If user wants to review a particular movie from his or her list of favorite movi
 ## Delete Movie
 
 If the user want to remove the movie from his or her list, then he/she would click on a movie poster in the favorite movie list. After that, when it appears at the center of the screen, the user can press on **Delete** button, which is under the movie's poster and info. Then the movie will be removed from the favorite movies list, DOM and from the backend effectively. 
+
+## Demo
+
+Here is an example of how the app work.
