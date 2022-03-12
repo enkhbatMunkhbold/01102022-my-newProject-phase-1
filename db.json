@@ -1,3 +1,24 @@
 {
-  "movies": []
+  "movies": [
+    {
+      "Movie_id": 1,
+      "Title": "Oscar",
+      "Poster": "https://m.media-amazon.com/images/M/MV5BMjRhYjg3YWEtOTYzZS00ZWY5LWJkNmEtYWE0YmQ3NDY2OWZlXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg",
+      "Genre": "Comedy, Crime",
+      "Year": "1991",
+      "Rating": "6.5/10",
+      "Plot": "A gangster attempts to keep the promise he made to his dying father: that he would give up his life of crime and \"go straight\".",
+      "id": 1
+    },
+    {
+      "Movie_id": 2,
+      "Title": "Rambo",
+      "Poster": "https://m.media-amazon.com/images/M/MV5BMTI5Mjg1MzM4NF5BMl5BanBnXkFtZTcwNTAyNzUzMw@@._V1_SX300.jpg",
+      "Genre": "Action, Adventure, Thriller",
+      "Year": "2008",
+      "Rating": "7.0/10",
+      "Plot": "In Thailand, John Rambo joins a group of mercenaries to venture into war-torn Burma, and rescue a group of Christian aid workers who were kidnapped by the ruthless local infantry unit.",
+      "id": 2
+    }
+  ]
 }

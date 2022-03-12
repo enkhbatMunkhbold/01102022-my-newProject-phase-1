@@ -41,7 +41,7 @@ i {
 
 #list {
   text-align: center;
-  height: 1100px;
+  height: 1200px;
   border: #2FA4FF;
   border-style: groove;
 }
@@ -64,7 +64,7 @@ ul {
   cursor: pointer;
 }
 
-.marquee {
+/* .marquee {
   overflow: hidden;
   position: relative;
   height: 1100px;
@@ -74,7 +74,7 @@ ul {
 {
   0% { top: -100% }
   100% { top: 100% }
-}
+} */
 
 #movie-detail {
   padding-top: 2rem;

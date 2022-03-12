@@ -45,7 +45,7 @@ function renderMovie(m) {
 
   img.addEventListener('click', () => {
     setMovieDetailsToDom(m, m.Rating, savedMovie = true)
-    deleteMovie(m)
+    deleteMovie
   })
 }
 
@@ -60,26 +60,26 @@ function deleteMovie(obj, btn) {
     if (imageSize === 0) {
       setMovieDetailsToDom(defaultInfo, defaultInfo.Ratings, savedMovie = false)
     } else if (imageSize === 1) {
-      setMovieDetailsToDom(defaultInfo, defaultInfo.Ratings, savedMovie = false)
-      removeMovieFromDB(obj)
+      setMovieDetailsToDom(defaultInfo, defaultInfo.Ratings, savedMovie = false)      
       movie_id = 0
       list.pop(obj)
       imageList[0].remove()
+      removeMovieFromDB(obj)
     } else {
       savedMovie = true
       for (let i = 0; i < imageSize; i++) {
         if (list[i].Title === obj.Title) {
           if (i === imageSize - 1) {
-            setMovieDetailsToDom(list[0], list[0].Ratings, savedMovie)
-            removeMovieFromDB(list[i])
+            setMovieDetailsToDom(list[0], list[0].Ratings, savedMovie)            
             list.splice(i, 1)
             imageList[i].remove()
+            removeMovieFromDB(list[i])
             return
           } else {
-            setMovieDetailsToDom(list[i + 1], list[i + 1].Rating, savedMovie)
-            removeMovieFromDB(list[i])
+            setMovieDetailsToDom(list[i + 1], list[i + 1].Rating, savedMovie)            
             list.splice(i, 1)
             imageList[i].remove()
+            removeMovieFromDB(list[i])
             return
           }
         }
@@ -91,6 +91,11 @@ function deleteMovie(obj, btn) {
 function saveMovie(button, obj) {
 
   button.addEventListener('click', () => {
+    const title = document.querySelector('h3.title').textContent   
+    console.log("Title:", title)
+    if(title === 'Movie title goes here...') {
+      return
+    }
     let found = list.find(movie => movie.Title === obj.Title ? true : false)
     if (!found) {
       movie_id += 1
@@ -112,7 +117,13 @@ function saveMovie(button, obj) {
           body: JSON.stringify(element)
         })
         .then(res => res.json())
-        .then(data => console.log(data))
+        .then(data =>{
+          console.log('data.id:', data.id);
+          console.log('data.Movie_id:', data.Movie_id);
+          if(data.id !== data.Movie_id) {
+            data.Movie_id = data.id
+          }
+        })
       list.push(element)
       renderMovie(element)
 
@@ -121,7 +132,7 @@ function saveMovie(button, obj) {
 }
 
 function removeMovieFromDB(movie) {
-  fetch(`http://localhost:3000/movies/${movie.Movie_id}`, {
+  fetch(`http://localhost:3000/movies/${movie.id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json'
@@ -195,7 +206,7 @@ function setMovieDetailsToDom(obj, rate, movieStatus) {
     const saveBtn = makeEl('button')
     saveBtn.type = 'submit'
     saveBtn.className = 'btn btn-outline-light col-5 btn-lg saveBtn'
-    saveBtn.id = "saveBtn" + obj.id
+    saveBtn.id = "saveBtn"
     saveBtn.textContent = 'Save to Favorite'
     buttons.appendChild(saveBtn)    
     saveMovie(saveBtn, obj)
@@ -203,7 +214,7 @@ function setMovieDetailsToDom(obj, rate, movieStatus) {
     const deleteBtn = makeEl('button')
     deleteBtn.type = 'submit'
     deleteBtn.className = 'btn btn-outline-light col-5 btn-lg deleteBtn'
-    deleteBtn.id = "deleteBtn" + obj.id
+    deleteBtn.id = "deleteBtn"
     deleteBtn.textContent = 'Delete'
     buttons.appendChild(deleteBtn)
     deleteMovie(obj, deleteBtn)
