@@ -1,14 +1,14 @@
 let list = []
 let savedMovie = false
-let movie_id = 0
+// let movie_id = 0
 
 const defaultInfo = {
-  "Title": "Movie title goes here...",
-  "Poster": "./src/image-placeholder.jpg",
-  "Genre": "Movie genre goes here...",
-  "Year": " ...",
-  "Ratings": "0.0/10",
-  "Plot": "Short description about a movie..."
+  Title: "Movie title goes here...",
+  Poster: "./src/image-placeholder.jpg",
+  Genre: "Movie genre goes here...",
+  Year: " ...",
+  Ratings: "0.0/10",
+  Plot: "Short description about a movie..."
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -58,9 +58,9 @@ function deleteMovie(obj, btn) {
     console.log('List:', list);
     const imageList = movieList.children
     let imageSize = imageList.length
-    if(obj.id) {
-      obj.Movie_id = obj.id
-    }
+    // if(obj.id) {
+    //   obj.Movie_id = obj.id
+    // }
 
     if (imageSize === 0) {
       setMovieDetailsToDom(defaultInfo, defaultInfo.Ratings, savedMovie = false)
@@ -69,7 +69,7 @@ function deleteMovie(obj, btn) {
       imageList[0].remove()
       removeMovieFromDB(obj)
       list.pop(obj)
-      movie_id = 0
+      // movie_id = 0
     } else {
       savedMovie = true
       for (let i = 0; i < imageSize; i++) {
@@ -102,15 +102,15 @@ function saveMovie(button, obj) {
     }
     let found = list.find(movie => movie.Title === obj.Title ? true : false)
     if (!found) {
-      movie_id += 1
+      // movie_id += 1
       const element = {
-        "Movie_id": movie_id,
-        "Title": obj.Title,
-        "Poster": obj.Poster,
-        "Genre": obj.Genre,
-        "Year": obj.Year,
-        "Rating": obj.Ratings[0].Value,
-        "Plot": obj.Plot
+        // Movie_id: movie_id,
+        Title: obj.Title,
+        Poster: obj.Poster,
+        Genre: obj.Genre,
+        Year: obj.Year,
+        Rating: obj.Ratings[0].Value,
+        Plot: obj.Plot
       }
 
       fetch('http://localhost:3000/movies', {
@@ -122,10 +122,12 @@ function saveMovie(button, obj) {
         })
         .then(res => res.json())
         .then(data =>{
-          console.log('data.id:', data.id);
-          console.log('data.Movie_id before:', data.Movie_id);          
-          data.Movie_id = data.id   
-          console.log('data.Movie_id after:', data.Movie_id)       
+          // console.log('data.id:', data.id);
+          // console.log('data.Movie_id before:', data.Movie_id);          
+          // data.Movie_id = data.id   
+          // console.log('data.Movie_id after:', data.Movie_id)   
+          movieList.reset()
+          renderFavoriteMovieList()    
         })
       list.push(element)
       renderMovie(element)
@@ -135,7 +137,7 @@ function saveMovie(button, obj) {
 }
 
 function removeMovieFromDB(obj) {
-  fetch(`http://localhost:3000/movies/${obj.Movie_id}`, {
+  fetch(`http://localhost:3000/movies/${obj.id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json'
@@ -176,7 +178,7 @@ function searchMovies() {
 function setMovieDetailsToDom(obj, rate, movieStatus) {
   const popMovies = document.querySelector('div#pop-movie')
   popMovies.innerHTML = ''
-  
+
   const img = makeEl('img')
   if (obj.Poster === 'N/A') {
     obj.Poster = "./src/image-placeholder.jpg"
