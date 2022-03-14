@@ -30,3 +30,4 @@ If the user want to remove the movie from his or her list, then he/she would cli
 ## Demo
 
 Here is an example of how the app work.
+https://user-images.githubusercontent.com/33409864/158258197-19f80745-b972-41d2-89f7-07dc7c6edd99.mp4
