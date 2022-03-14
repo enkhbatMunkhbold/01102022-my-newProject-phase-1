@@ -31,3 +31,4 @@ If the user want to remove the movie from his or her list, then he/she would cli
 
 Here is an example of how the app work.
 
+![movie-search-Trim](https://user-images.githubusercontent.com/33409864/158263534-6879f52d-e386-436b-ade2-ea0ec0117a25.gif)
