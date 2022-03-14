@@ -31,6 +31,7 @@ const movieList = document.querySelector('ul#movie-list')
 const movieDetail = document.querySelector('div#movie-detail')
 const commentsAndRating = document.querySelector('div.commentsAndRating')
 const buttons = document.querySelector('div.buttons')
+const search = document.querySelector('#search-form')
 
 function renderMovie(m) {
   const moviePoster = makeEl('li')
@@ -50,36 +51,40 @@ function renderMovie(m) {
 }
 
 function deleteMovie(obj, btn) {
-  btn.addEventListener('click', () => {
+  btn.addEventListener('click', (e) => {
     debugger
+    console.log('event target:', e.target)
     console.log('movieList before:', movieList.children);
     console.log('List:', list);
     const imageList = movieList.children
     let imageSize = imageList.length
+    if(obj.id) {
+      obj.Movie_id = obj.id
+    }
 
     if (imageSize === 0) {
       setMovieDetailsToDom(defaultInfo, defaultInfo.Ratings, savedMovie = false)
     } else if (imageSize === 1) {
-      setMovieDetailsToDom(defaultInfo, defaultInfo.Ratings, savedMovie = false)      
-      movie_id = 0
-      list.pop(obj)
+      setMovieDetailsToDom(defaultInfo, defaultInfo.Ratings, savedMovie = false)  
       imageList[0].remove()
       removeMovieFromDB(obj)
+      list.pop(obj)
+      movie_id = 0
     } else {
       savedMovie = true
       for (let i = 0; i < imageSize; i++) {
         if (list[i].Title === obj.Title) {
           if (i === imageSize - 1) {
-            setMovieDetailsToDom(list[0], list[0].Ratings, savedMovie)            
-            list.splice(i, 1)
+            setMovieDetailsToDom(list[0], list[0].Ratings, savedMovie) 
             imageList[i].remove()
             removeMovieFromDB(list[i])
+            list.splice(i, 1)
             return
           } else {
-            setMovieDetailsToDom(list[i + 1], list[i + 1].Rating, savedMovie)            
-            list.splice(i, 1)
+            setMovieDetailsToDom(list[i + 1], list[i + 1].Rating, savedMovie) 
             imageList[i].remove()
             removeMovieFromDB(list[i])
+            list.splice(i, 1)
             return
           }
         }
@@ -92,7 +97,6 @@ function saveMovie(button, obj) {
 
   button.addEventListener('click', () => {
     const title = document.querySelector('h3.title').textContent   
-    console.log("Title:", title)
     if(title === 'Movie title goes here...') {
       return
     }
@@ -119,10 +123,9 @@ function saveMovie(button, obj) {
         .then(res => res.json())
         .then(data =>{
           console.log('data.id:', data.id);
-          console.log('data.Movie_id:', data.Movie_id);
-          if(data.id !== data.Movie_id) {
-            data.Movie_id = data.id
-          }
+          console.log('data.Movie_id before:', data.Movie_id);          
+          data.Movie_id = data.id   
+          console.log('data.Movie_id after:', data.Movie_id)       
         })
       list.push(element)
       renderMovie(element)
@@ -131,8 +134,8 @@ function saveMovie(button, obj) {
   })
 }
 
-function removeMovieFromDB(movie) {
-  fetch(`http://localhost:3000/movies/${movie.id}`, {
+function removeMovieFromDB(obj) {
+  fetch(`http://localhost:3000/movies/${obj.Movie_id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json'
@@ -142,14 +145,12 @@ function removeMovieFromDB(movie) {
     .then(movie => console.log('Removed movie from DB:', movie))
 }
 
-function searchMovies() {
-  const search = document.querySelector('#search-form')
+function searchMovies() { 
 
   search.addEventListener('submit', (e) => {
     e.preventDefault()
     const movieName = e.target[0].value
-    const searchMovieTitle = document.querySelector('input#movie_title')
-    searchMovieTitle.value = ''
+    search.reset()
 
     fetch(`http://www.omdbapi.com/?t=${movieName}&apikey=19546fcd`)
       .then(res => res.json())
@@ -166,8 +167,8 @@ function searchMovies() {
       })
       .catch(err => {
         console.log('err:', err)
-        foundMovie = false
-        setMovieDetailsToDom(defaultInfo, '0.0/10', foundMovie)
+        savedMovie = false
+        setMovieDetailsToDom(defaultInfo, '0.0/10', savedMovie)
       })
   })
 }
@@ -175,6 +176,7 @@ function searchMovies() {
 function setMovieDetailsToDom(obj, rate, movieStatus) {
   const popMovies = document.querySelector('div#pop-movie')
   popMovies.innerHTML = ''
+  
   const img = makeEl('img')
   if (obj.Poster === 'N/A') {
     obj.Poster = "./src/image-placeholder.jpg"
