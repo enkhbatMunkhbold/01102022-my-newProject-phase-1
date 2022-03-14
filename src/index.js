@@ -1,6 +1,5 @@
 let list = []
 let savedMovie = false
-// let movie_id = 0
 
 const defaultInfo = {
   Title: "Movie title goes here...",
@@ -51,16 +50,10 @@ function renderMovie(m) {
 }
 
 function deleteMovie(obj, btn) {
-  btn.addEventListener('click', (e) => {
-    debugger
-    console.log('event target:', e.target)
-    console.log('movieList before:', movieList.children);
-    console.log('List:', list);
+  btn.addEventListener('click', () => {
+      
     const imageList = movieList.children
     let imageSize = imageList.length
-    // if(obj.id) {
-    //   obj.Movie_id = obj.id
-    // }
 
     if (imageSize === 0) {
       setMovieDetailsToDom(defaultInfo, defaultInfo.Ratings, savedMovie = false)
@@ -69,7 +62,6 @@ function deleteMovie(obj, btn) {
       imageList[0].remove()
       removeMovieFromDB(obj)
       list.pop(obj)
-      // movie_id = 0
     } else {
       savedMovie = true
       for (let i = 0; i < imageSize; i++) {
@@ -102,9 +94,7 @@ function saveMovie(button, obj) {
     }
     let found = list.find(movie => movie.Title === obj.Title ? true : false)
     if (!found) {
-      // movie_id += 1
       const element = {
-        // Movie_id: movie_id,
         Title: obj.Title,
         Poster: obj.Poster,
         Genre: obj.Genre,
@@ -121,17 +111,10 @@ function saveMovie(button, obj) {
           body: JSON.stringify(element)
         })
         .then(res => res.json())
-        .then(data =>{
-          // console.log('data.id:', data.id);
-          // console.log('data.Movie_id before:', data.Movie_id);          
-          // data.Movie_id = data.id   
-          // console.log('data.Movie_id after:', data.Movie_id)   
-          movieList.reset()
-          renderFavoriteMovieList()    
+        .then(movie =>{
+          list.push(movie)
+          renderMovie(movie)
         })
-      list.push(element)
-      renderMovie(element)
-
     }
   })
 }

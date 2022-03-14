@@ -1,13 +1,3 @@
 {
-  "movies": [
-    {
-      "Title": "Aliens",
-      "Poster": "https://m.media-amazon.com/images/M/MV5BZGU2OGY5ZTYtMWNhYy00NjZiLWI0NjUtZmNhY2JhNDRmODU3XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg",
-      "Genre": "Action, Adventure, Sci-Fi",
-      "Year": "1986",
-      "Rating": "8.3/10",
-      "Plot": "Fifty-seven years after surviving an apocalyptic attack aboard her space vessel by merciless space creatures, Officer Ripley awakens from hyper-sleep and tries to warn anyone who will listen about the predators.",
-      "id": 3
-    }
-  ]
+  "movies": []
 }
